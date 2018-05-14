@@ -1,18 +1,33 @@
+<div class="row_filler">
+</div>
+<div class="ui two column grid">
+<div class="column" id="playlist_list">
+<form class="ui large form">
+  <div class="ui stacked segment">
 <h1><%= @user.username.capitalize + "'s" %> Playlists</h1>
-<ul>
-<% @user.playlists.each do |playlist|%>
-  <li><%= link_to playlist.title, user_playlist_path(@user, playlist) %></li>
+  <ul>
+  <% @user.playlists.each do |playlist|%>
+   <p id="playlist_list"><%= link_to playlist.title, user_playlist_path(@user, playlist) %></p>
+  <% end %>
+  </ul>
+</div>
+</form>
+<% if @owner_homepage %>
+  <%= button_to 'Delete User Account', @user, method: :delete, class: "ui secondary button" %>
 <% end %>
-</ul>
+</div>
 
 <% if @owner_homepage %>
-<h1>Create a new playlist</h1>
-  <%= form_tag(user_playlists_path(@user), method: :post) do %>
-  <label>Title</label>
-  <%= text_field_tag :title %>
-  <%= submit_tag 'Create a Playlist' %>
-  <% end %>
-
-<br>
-  <%= button_to 'Delete User Account', @user, method: :delete %>
+  <div class="column" id="add_playlist_form">
+  <div class="ui large form">
+    <div class="ui stacked segment">
+    <h2 class="ui black image header">Create a new playlist</h2>
+    <%= form_tag(user_playlists_path(@user), method: :post) do %>
+    <%= text_field_tag :title, "", placeholder: "Enter a playlist title" %> <br>
+    <%= submit_tag 'Create a Playlist', class: "ui secondary button" %>
+    <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>
+</div>

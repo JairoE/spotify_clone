@@ -1,35 +1,61 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Moodify</title>
+    <title>moodify</title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-    <link rel=“stylesheet” href=“https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css“/>
-    <script src=“https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js”></script>
-    <script src=“https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js”></script>
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.js"></script>
+    <style>
+      body{
+        padding: 10px;
+      }
+    </style>
   </head>
 
-  <body>
+  <body id="background_color">
+    <% if session[:user_id] %>
+    <div class="ui inverted menu">
     <nav>
-      <% if session[:user_id] %>
-        <h1>Look for a playlist that fits your sadboi levels</h1>
-        <%= form_tag(user_playlists_search_by_mood_path(session[:user_id]), method: :get) do %>
-        <%= label_tag "Enter your mood" %>
-        <%= number_field_tag :mood, nil, min:1, max:10, placeholder: "Enter a Mood" %>
-        <%= submit_tag "︻╦╤─" %>
-        <% end %>
+      <div class="header item">
+      <button class="ui inverted grey button"><%= link_to 'Logout', action: 'logout', controller: 'users' %></button>
+      </div>
+      <div class="header item">
+      <button class="ui inverted grey button"><%= link_to 'Home', user_path(session[:user_id]), :method => :get %></button>
+      </div>
+
+      <div class="item">
+        <h1 class="ui red header">
+          moodify
+        </h1>
+      </div>
+      <div class="right menu">
+        <div class="item">
+          <p class="ui red header">Look for a playlist that fits your sadboi levels</p>
+        </div>
+        <div class="item">
+          <div class="ui transparent inverted icon input">
+
+              <%= form_tag(user_playlists_search_by_mood_path(session[:user_id]), method: :get) do %>
+              <div class="ui label">
+                <%= label_tag "Enter Mood (1-10)" %>
+
+                <%= number_field_tag :mood, nil, min:1, max:10, placeholder: "#" %>
+              </div>
+              <div class="ui label">
+              <%= submit_tag "Search"%>
+            </div>
+              <% end %>
+          </div>
       <% end %>
+    </div>
     </nav>
+  </div>
     <%= yield %>
 
-    <% if session[:user_id] %>
-      <%= button_to 'Logout', action: 'logout', controller: 'users' %>
-      <%= button_to 'Home', user_path(session[:user_id]), :method => :get %>
-
-  <% end %>
   </body>
 </html>

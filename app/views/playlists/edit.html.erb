@@ -1,7 +1,15 @@
-<h1>Add Songs (sadboi only plz) to <%= @playlist.title %></h1>
+<div class="row_filler">
+</div>
+<div class="column">
+<div class="ui large form" id="add_form">
+  <div class="ui stacked segment">
+<h1>Add a song to the <%= @playlist.title %> playlist</h1>
 <h3>Search for a song</h3>
 
 <%= form_tag(user_playlist_search_path(@playlist.user_id, @playlist), method: :post) do %>
-<%= text_field_tag :song_and_artist %>
-<%= submit_tag "Search" %>
+<%= text_field_tag :song_and_artist, "", placeholder: "Enter song name and artist name" %>
+<%= submit_tag "Search" , class: "ui secondary button", id: "search_for_song" %>
 <% end %>
+  </div>
+</div>
+</div>

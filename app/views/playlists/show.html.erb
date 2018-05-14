@@ -1,25 +1,49 @@
-<h1> Songs within your playlist</h1>
+<h1><%= @playlist.title.downcase %>: total sadboi rating of a <%=@playlist.mood%> <h1>
+<h1> sadboi songs in this playlist</h1>
+<div class="ui three column grid">
+  <% @playlist.playlist_songs.each do |playlist_song| %>
+    <div class="column">
+      <div class="ui fluid card">
+          <% videoId = Song.find(playlist_song.song_id).video_id %>
+          <% Yt.configuration.api_key = "AIzaSyDXvv8XUM7amNwkw_LD9lXwZUstWcVO0xw" %>
+          <% video = Yt::Video.new id: videoId %>
+          <iframe id="ytplayer" type="text/html" width="100%" height="300"src="https://www.youtube.com/embed/<%=videoId%>"frameborder="0"></iframe>
+        <div class="content" style="background-color: #191A1C; color: white;">
+          <p> <%= video.title.downcase %> with a sadboi rating of <%= playlist_song.mood %></p>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 
-<h3> Sadboi rating: <%=@playlist.mood%></h3>
-show all the videos of the playlist from the playlist songs
-iterate through all the plasylistsong objects  b/c thats the only way we can access the Songs
 
-
-
-<% @playlist.playlist_songs.each do |playlist_song| %>
-  <% videoId = Song.find(playlist_song.song_id).video_id %>
-  <% Yt.configuration.api_key = "AIzaSyDXvv8XUM7amNwkw_LD9lXwZUstWcVO0xw" %>
-  <% video = Yt::Video.new id: videoId %>
-  <h4><%= video.title %></h4> <br>
-  <p><%= playlist_song.mood %></p>
-  <iframe id="ytplayer" type="text/html" width="640" height="360"
-  src="https://www.youtube.com/embed/<%=videoId%>"
-  frameborder="0"></iframe>
-<% end %>
-
-<% if @owner_homepage %>
-<%= button_to 'Add a song', edit_user_playlist_path(@playlist.user_id, @playlist), :method => :get %>
-<%= button_to 'Delete This Playlist', user_playlist_path(@playlist.user_id, @playlist), method: :delete %>
-<% end %>
-
-<%= button_to "See which sadboi owns this playlist", user_path(@playlist.user_id), :method => :get %>
+  <div class='playlist-footer'>
+      <!-- <div class="three column grid"> -->
+      <div class="ui buttons">
+        <% if @owner_homepage %>
+          <div class="ui button">
+            Add Song
+            <div class="hider-1">
+            <%= link_to 'add another song', edit_user_playlist_path(@playlist.user_id, @playlist), :method => :get %>
+            </div>
+          </div>
+          <div class="ui button">
+            Delete Playlist
+            <div class="hider-2">
+            <%= link_to 'delete this playlist', user_playlist_path(@playlist.user_id, @playlist), method: :delete %>
+          </div>
+          </div>
+        <% end %>
+          <div class="ui button">
+            View Sadboi Playlist Owner
+            <div class="hider-3">
+              <%= link_to "see which sadboi owns this playlist", user_path(@playlist.user_id), :method => :get  %>
+            </div>
+          </div>
+      </div>
+  </div>

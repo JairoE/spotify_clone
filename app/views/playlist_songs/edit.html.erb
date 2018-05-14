@@ -1,7 +1,10 @@
-<h1> Set the Mood of the song </h1>
-
-<%= form_tag(user_playlist_playlist_song_path(user_id: @user_id, playlist_id: @playlist_song.playlist_id, playlist_song_id: @playlist_song.id), method: :patch) do %>
-<label>Mood Rating</label>
-<%= number_field_tag :mood,nil, min: 1, max: 10 %>
-<%= submit_tag %>
-<% end %>
+<div class="ui large form" id="add_form">
+  <div class="ui stacked segment">
+    <h1>how does this make you feel?</h1>
+      <p> 1 = super happyboi to 10 = super sadboi</p>
+        <%= form_tag(user_playlist_playlist_song_path(user_id: @user_id, playlist_id: @playlist_song.playlist_id, playlist_song_id: @playlist_song.id), method: :patch) do %>
+          <%= number_field_tag :mood,nil, min: 1, max: 10 %>
+            <%= submit_tag "set the mood", class: "ui secondary button"  %>
+            <% end %>
+  </div>
+</div>

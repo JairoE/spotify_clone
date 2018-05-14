@@ -1,21 +1,44 @@
-<h1>Signup New Sadboi</h1>
-<%= form_tag('/signup', method: :post) do  %>
-
-<br>cannot contain any special characters<br>
-<%= label_tag "Enter New Username" %>
-<%= text_field_tag :'[user]username'%><br>
-
-<br>must contain at least 1 number, 1 special character, and be at least 7 characers long<br>
-<%= label_tag "Enter Password" %>
-<%= password_field_tag :'[user]password'%>
-
-<%= label_tag "Confirm Password" %>
-<%= password_field_tag :'[user]password_confirmation'%><br>
-<%= label_tag "Enter First Name" %>
-<%= text_field_tag :'[user]first_name'%><br>
-<%= label_tag "Enter Last Name" %>
-<%= text_field_tag :'[user]last_name'%><br>
-<%= label_tag "Enter Email address" %>
-<%= text_field_tag :'[user]email'%><br>
-<%= submit_tag "Sign up" %>
-<% end %>
+<div class="row_filler"></div>
+  <div class="ui center aligned grid">
+    <div class="column" id="signup_form">
+      <div class="ui form">
+        <h1> create your sadboi alter-ego </h1>
+        <p>no judgement zone</p>
+        <div class="equal width fields">
+          <%= form_tag('/signup', method: :post) do  %>
+        <div class="required fielsd">
+        <!-- <label>Username</label> -->
+        <%= text_field_tag :'[user]username',"", placeholder: "Username"%>
+        <p id="signup_form_text"> Cannot contain any special characters. </p>
+        </div>
+        <div class="required field">
+        <!-- <label>Password</label> -->
+        <%= password_field_tag :'[user]password',"", placeholder: "Password"%>
+        <p id="signup_form_text"> Must contain at least 1 number & be at least 7 characers long. </p>
+        </div>
+        <div class="required field">
+        <!-- <label>Password Confirmation</label> -->
+        <%= password_field_tag :'[user]password_confirmation',"", placeholder: "Password"%>
+        <p id="signup_form_text"> Must match your password. </p>
+        </div>
+        <div class="required field">
+        <!-- <label>First name</label> -->
+        <%= text_field_tag :'[user]first_name',"", placeholder: "First Name"%>
+        </div>
+        <div class="required field">
+        <!-- <label>Last name</label> -->
+        <%= text_field_tag :'[user]last_name' ,"", placeholder: "Last Name"%>
+        </div>
+        <div class="required field">
+        <!-- <label>Email</label> -->
+        <%= text_field_tag :'[user]email',"", placeholder: "Email"%>
+        </div>
+          <button id="sign_up_form_button" type="submit" formmethod="post" formaction="/signup" class="ui primary button">
+            SIGN UP
+          </button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<div class="row_filler"></div>

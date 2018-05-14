@@ -4,7 +4,6 @@ class PlaylistsController < ApplicationController
 
   def create
     @playlist = Playlist.new(title: params[:title], user_id: params[:user_id])
-    # byebug
     if !@playlist.valid?
       redirect_to user_path(params[:user_id])
     else
