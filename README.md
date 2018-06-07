@@ -1,16 +1,18 @@
-#README
+# README
 
 Moodify - A playlist generating web app, where you can listen to music based on your mood.
 Created by Ben Matare & Jairo Espinosa
 
+____________
 Demo -> https://www.youtube.com/watch?v=7YXeMFeY6eM
-
-##Built with --> Ruby on Rails
+____________
+## Built with:
+Ruby on Rails
 JavaScript
 Semantic UI
 YoutubeAPI
-
-##INSTRUCTIONS
+____________
+## INSTRUCTIONS
 
 1. Fork this repo
 2. Clone and download to your local machine
